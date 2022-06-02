@@ -100,12 +100,12 @@ class TasksController extends Controller
      */
     public function update(Request $request,$id)
     {
-        /*$request->validate([
+        $request->validate([
             'status'=>'required|max:10',
             'content'=>'required|max:255',
             ]);
         
-         $request->user()->tasks($id)->update([
+         /*$request->user()->tasks($id)->update([
                 'status'=>$request->status,
                 'content'=>$request->content,]);
                 
