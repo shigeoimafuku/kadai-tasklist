@@ -49,18 +49,20 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-                'status'=>'required|max:255',
-                'content'=>'required|max:255',
-            ]);
-            
-        $request->user()->tasks()->create([
-                'status'=>$request->status,
-                'content'=>$request->content,
+        
+            $request->validate([
+                    'status'=>'required|max:255',
+                    'content'=>'required|max:255',
+                ]);
                 
-            ]);
+            $request->user()->tasks()->create([
+                    'status'=>$request->status,
+                    'content'=>$request->content,
+                    
+                ]);
             
-        return redirect('/');    
+            return redirect('/');
+            
     }
 
     /**
@@ -72,9 +74,16 @@ class TasksController extends Controller
     public function show($id)
     {
         $task=Task::findOrFail($id);
-        $user=\Auth::user();
         
-        return view('tasks.show',['task'=>$task,'user'=>$user,]);
+        if(\Auth::id()===$task->user_id){
+            $user=\Auth::user();
+            
+            return view('tasks.show',['task'=>$task,'user'=>$user,]);
+        }
+        
+        else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -86,9 +95,17 @@ class TasksController extends Controller
     public function edit($id)
     {
         $task=Task::findOrFail($id);
-        $user=\Auth::user();
         
-        return view('tasks.edit',['task'=>$task,'user'=>$user,]);
+        if(\Auth::id()===$task->user_id){
+            
+            $user=\Auth::user();
+            
+            return view('tasks.edit',['task'=>$task,'user'=>$user,]);
+        }    
+        
+        else{
+            return view('welcome');
+        }
     }
 
     /**
