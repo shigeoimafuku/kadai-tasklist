@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>id={{ $task->id }}のタスク詳細</h1>
+    <h1>{{ $user->name }}のid:{{ $task->id }}のタスク詳細</h1>
 
     <table class="table table-boredered">
         <tr>
