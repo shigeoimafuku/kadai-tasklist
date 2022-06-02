@@ -98,28 +98,28 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $request->validate([
+        /*$request->validate([
             'status'=>'required|max:10',
             'content'=>'required|max:255',
             ]);
         
-         $request->user()->tasks()->update([
+         $request->user()->tasks($id)->update([
                 'status'=>$request->status,
                 'content'=>$request->content,]);
                 
-        return redirect('/');
+        return redirect('/');*/
         
             
             
-       /*$task=Task::findOrFail($id);
+        $task=Task::findOrFail($id);
         $task->status=$request->status;
         $task->content=$request->content;
-        $task->user_id=$request->user_id;
+        
         $task->save();
         
-        return redirect('/');*/
+        return redirect('/');
     }
 
     /**
